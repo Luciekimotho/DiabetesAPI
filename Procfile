@@ -1,0 +1,1 @@
+web: gunicorn diabetesproj.wsgi --log-file -
