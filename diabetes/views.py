@@ -1,3 +1,4 @@
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
@@ -6,6 +7,7 @@ from rest_framework import status
 from .models import Profile
 from .models import Readings
 from .serializers import ProfileSerializer, ReadingsSerializer, UserReadingSerializer
+from rest_framework.parsers import JSONParser
 
 # Create your views here.
 from django.http import HttpResponse
@@ -60,8 +62,13 @@ class UserReadingsList(APIView):
         userreadingsSerializer = UserReadingSerializer(userreadings,many=True)
         return Response(userreadingsSerializer.data)
 
-    def post(self):
-        pass
+    def post(self, request):
+        data = JSONParser().parse(request)
+        serializer = UserReadingSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=201)
+        return JsonResponse(serializer.errors, status=400)
 
 class UserReading(APIView):
     def get_object(self, pk):
