@@ -11,7 +11,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 class ReadingsSerializer(serializers.ModelSerializer):
     class Meta: 
         model = Readings
-        fields = ('glucoseLevel', 'timePeriod')
+        fields = '__all__'
 
 
 class UserReadingSerializer(serializers.ModelSerializer):

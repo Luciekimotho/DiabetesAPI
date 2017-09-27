@@ -47,9 +47,8 @@ class ReadingsList(APIView):
 
 class ReadingDetail(APIView):
     def get_object(self, pk):
-            return Profile.objects.get(pk=pk)
-        
-
+            return Readings.objects.get(pk=pk)
+               
     def get(self, request, pk, format=None):
         reading = self.get_object(pk)
         readingSerializer = ReadingsSerializer(reading)
@@ -61,6 +60,14 @@ class UserReadingsList(APIView):
         userreadingsSerializer = UserReadingSerializer(userreadings,many=True)
         return Response(userreadingsSerializer.data)
 
-
     def post(self):
         pass
+
+class UserReading(APIView):
+    def get_object(self, pk):
+         return Profile.objects.get(pk=pk)
+
+    def get(self, request, pk, format=None):
+        reading = self.get_object(pk)
+        userreadingSerializer = UserReadingSerializer(reading)
+        return Response(userreadingSerializer.data)
