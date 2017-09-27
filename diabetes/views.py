@@ -11,8 +11,8 @@ from .serializers import ProfileSerializer
 from django.http import HttpResponse
 
 
-# def index(request):
-#     return HttpResponse("Hello, world. You're at the diabetes index.")
+def index(request):
+    return HttpResponse("Hello, world. You're at the diabetes index.")
 
 class ProfileList(APIView):
     def get(self, request):
@@ -23,3 +23,13 @@ class ProfileList(APIView):
 
     def post(self):
         pass
+
+class ProfileDetail(APIView):
+    def get_object(self, pk):
+            return Profile.objects.get(pk=pk)
+        
+
+    def get(self, request, pk, format=None):
+        user = self.get_object(pk)
+        serializer = ProfileSerializer(user)
+        return Response(serializer.data)
