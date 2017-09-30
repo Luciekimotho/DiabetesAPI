@@ -8,6 +8,8 @@ from .models import Profile
 from .models import Reading
 from .serializers import ProfileSerializer, ReadingSerializer, UserInlineSerializer
 from rest_framework.parsers import JSONParser
+from rest_framework import generics
+from rest_framework.decorators import api_view
 
 # Create your views here.
 from django.http import HttpResponse
@@ -34,7 +36,6 @@ class ProfileDetail(APIView):
     def get_object(self, pk):
             return Profile.objects.get(pk=pk)
         
-
     def get(self, request, pk, format=None):
         user = self.get_object(pk)
         serializer = ProfileSerializer(user)
@@ -82,3 +83,21 @@ class UserReading(APIView):
         reading = self.get_object(pk)
         userreadingSerializer = UserInlineSerializer(reading)
         return Response(userreadingSerializer.data)
+
+
+class ReadingCreateView(generics.CreateAPIView):
+    serializer_class = ReadingSerializer
+
+    @api_view(["POST"])
+    def new_reading(request):
+        serializer = ReadingSerializer(request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"message": "New reading"}) 
+        else:
+            data = {
+            "error": True,
+            "errors": serializer.errors,          
+            }
+            return Response(data)
+
