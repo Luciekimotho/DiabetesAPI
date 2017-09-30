@@ -24,16 +24,7 @@ class Profile(models.Model):
 	def __str__(self):
 		return str(self.user)
 
-	# @receiver(post_save, sender=User)
-	# def create_user_profile(sender, instance, created, **kwargs):
-	#     if created:
-	#         Profile.objects.create(user=instance)
-
-	# @receiver(post_save, sender=User)
-	# def save_user_profile(sender, instance, **kwargs):
-	#     instance.profile.save()
-
-class Readings(models.Model):
+class Reading(models.Model):
 	user = models.ForeignKey(Profile,related_name='readings', on_delete=models.CASCADE)
 	glucoseLevel = models.DecimalField(max_digits=7, decimal_places=4)
 	timePeriod = models.CharField(max_length = 50)

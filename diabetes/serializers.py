@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import Profile
-from .models import Readings
+from .models import Reading
 
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta: 
@@ -8,14 +8,14 @@ class ProfileSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class ReadingsSerializer(serializers.ModelSerializer):
+class ReadingSerializer(serializers.ModelSerializer):
     class Meta: 
-        model = Readings
+        model = Reading
         fields = '__all__'
 
 
-class UserReadingSerializer(serializers.ModelSerializer):
-    readings = ReadingsSerializer(many=True)
+class UserInlineSerializer(serializers.ModelSerializer):
+    readings = ReadingSerializer(many=True)
     class Meta:
         model = Profile
         fields = ('user', 'readings')
