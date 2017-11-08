@@ -21,6 +21,9 @@ from diabetes import views
 urlpatterns = [
 url(r'^diabetes/', include('diabetes.urls')),
 url(r'^admin/', admin.site.urls),
+url(r'^$', views.index, name='index'),
+
+url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
 url(r'^users/', views.ProfileList.as_view()),
 url(r'^user/(?P<pk>[0-9]+)/$', views.ProfileDetail.as_view()),
