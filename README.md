@@ -23,3 +23,6 @@ API for diabetes management system using Python-Django.
     $ heroku login
     $ heroku create
     $ git push heroku master
+
+    $ heroku ps:scale web=1
+    $ heroku open
