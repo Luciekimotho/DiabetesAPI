@@ -76,9 +76,9 @@ WSGI_APPLICATION = 'diabetesproj.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 # Update database configuration with $DATABASE_URL.
-import dj_database_url
-db_from_env = dj_database_url.config()
-DATABASES = { 'default': dj_database_url.config() }
+# import dj_database_url
+# db_from_env = dj_database_url.config()
+# DATABASES = { 'default': dj_database_url.config() }
 
 
 

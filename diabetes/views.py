@@ -24,7 +24,6 @@ class ProfileList(APIView):
         userserializer = ProfileSerializer(users,many=True)
         return Response(userserializer.data)
 
-
     def post(self, request, format=None):
         serializer = ProfileSerializer(data=request.DATA)
         if serializer.is_valid():
