@@ -1,0 +1,68 @@
+{% load staticfiles %}
+<html>
+
+<head>
+  <title>Zalego Timeline</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.css' %}">
+  
+    <!-- Icons -->
+    <link rel="stylesheet" type="text/css" href="{% static 'fonts/css/font-awesome.min.css' %} ">
+    <link rel="stylesheet" type="text/css" href="{% static 'fonts/css/line-icons.css' %} ">
+
+    <!-- Core CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/core.css' %}">
+
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="{% static 'base.css' %}">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-right">
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav abs-center-x menu-items">
+              
+             
+            </ul>
+            {% if user.is_authenticated %}
+            <ul class="navbar-nav ml-auto profile">
+                <li class="dropdown dropdown-list">
+                    <a href="#" data-toggle="dropdown"> 
+                        
+                        <label>{{ user.username }}</label> 
+                        <em class="icon-user"></em><br>
+                        <a href="{% url 'logout' %}" >Logout</a>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <div class="list-group">
+                                <a href="" class="list-group-item">
+                                    <small>Log out</small>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+              
+             </ul>
+             {% else %}
+             <a href="{% url 'login' %}" class="btn btn-theme">Login</a>
+           {% endif %}
+          </div>
+            </nav>
+      </header>
+  <div class="page-header">
+    <h1 class="blog-title"><a href="{% url 'index'%}">ZALEGO TIMELINE</a></h1>
+   
+  </div>
+    <div class="content container">
+      <div class="col-md-8">
+        {% block content %}
+        {% endblock %}
+      </div>
+    </div>
+
+</body>
+
+</html>

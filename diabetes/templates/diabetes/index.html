@@ -1,0 +1,33 @@
+{% extends 'timeline/base.html' %}
+
+{% block content %}
+    <!-- Main segment -->
+	<section>
+		<div class="container">
+			<h3 class="title">Choose your group</h3>
+          <section class="criteria  mt-5">
+          <div class="row">
+          	<div class="col-lg-3"></div>
+        		<div class="col-lg-3">
+        			<a href="{% url 'post_list' %}">
+        			<div class="card group-card">
+        				<label>ALPHA</label>
+        			</div>
+        		</a>
+        		</div>
+        		<div class="col-lg-3">
+        			<a href="">
+        			<div class="card group-card">
+        			<label>BETA</label>	
+        			</div></a>
+        		</div>
+        		<div class="col-lg-3 "></div>
+          </div>
+          	
+          </section>
+			
+		</div>
+	</section>
+	<!-- End of main segment -->
+
+{% endblock %}

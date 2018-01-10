@@ -37,4 +37,26 @@ class Reading(models.Model):
 
 	def __str__(self):
 		return self.glucoseLevel
-		
+
+
+class Doctor(models.Model):
+	doctor = models.OneToOneField(User, on_delete=models.CASCADE)
+	email = models.CharField(max_length = 50)
+	phone = models.CharField(max_length = 20)	
+	notes = models.CharField(max_length = 1000)
+
+	def __str__(self):
+		return str(doctor.user)
+
+
+class Caregiver(models.Model):
+	caregiver = models.OneToOneField(User, on_delete=models.CASCADE)
+	relation = models.CharField(max_length = 20)
+	email = models.CharField(max_length = 50)
+	phone = models.CharField(max_length = 20)
+	
+	def publish(self):
+		self.save()
+	
+	def __str__(self):
+		return str(self.caregiver)

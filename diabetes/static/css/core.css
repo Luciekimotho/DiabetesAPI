@@ -1,0 +1,155 @@
+/*
+* Core css styling 
+* v1.0 2017
+*/
+
+/*TABLE OF CONTENTS
+1. Menu navbar
+2. Text
+3. Buttons*/
+
+html{
+	font-size: 0.9rem;
+}
+
+/*Menu styling*/
+
+@media (min-width: 567px) {
+    .abs-center-x {
+        position: absolute;
+        top: 5px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+.menu-items .nav-link{
+	text-transform: uppercase;
+}
+/*End of menu*/
+
+
+/*Text styling*/
+.uppercase{
+	text-transform: uppercase;
+}
+
+.title{
+	text-transform: uppercase;
+}
+/*End of text styles*/
+
+
+/*Buttons*/
+.btn {
+  /*font-size: 0.875rem;*/
+  padding: 10px 30px;
+  border-radius: 0px;
+  font-weight: 400;
+  -webkit-transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+  display: inline-block;
+  border-radius: 0.15rem;
+
+}
+.btn:focus {
+  box-shadow: none;
+  outline: none;
+}
+.btn-theme {
+	color: #fff;
+  background-color: #4676fa;
+  position: relative;
+  z-index: 1;
+  border-radius: 4px;
+}
+.btn-theme:hover {
+  color: #fff;
+  opacity: 0.8;
+  border: 2px solid #4676fa;
+  transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -webkit-transition: all 0.5s ease-in-out;
+}
+
+.btn-section{
+
+}
+
+.basic-btns .btn,
+.outline-btns .btn{
+   margin-bottom: 4px;
+}
+
+
+.form-control{
+	padding: 0.1rem 0.75rem;
+}
+
+.datepicker{
+	font-size: 0.95rem;
+}
+
+.datepicker table tr td.active.active,
+.datepicker table tr td.active, 
+.datepicker table tr td.active:hover, 
+.datepicker table tr td.active.disabled, 
+.datepicker table tr td.active.disabled:hover{
+	background-color: #4676fa;
+}
+
+
+.datepicker table tr td.active, .datepicker table tr td.active:hover, .datepicker table tr td.active.disabled, .datepicker table tr td.active.disabled:hover{
+	background-image: #4676fa;
+}
+.datepicker table tr td.active:hover, 
+.datepicker table tr td.active:hover:hover, 
+.datepicker table tr td.active.disabled:hover, 
+.datepicker table tr td.active.disabled:hover:hover, 
+.datepicker table tr td.active:active, 
+.datepicker table tr td.active:hover:active, 
+.datepicker table tr td.active.disabled:active, 
+.datepicker table tr td.active.disabled:hover:active, 
+.datepicker table tr td.active.active, 
+.datepicker table tr td.active:hover.active, 
+.datepicker table tr td.active.disabled.active, 
+.datepicker table tr td.active.disabled:hover.active, 
+.datepicker table tr td.active.disabled, 
+.datepicker table tr td.active:hover.disabled, 
+.datepicker table tr td.active.disabled.disabled, 
+.datepicker table tr td.active.disabled:hover.disabled, 
+.datepicker table tr td.active[disabled], 
+.datepicker table tr td.active:hover[disabled], 
+.datepicker table tr td.active.disabled[disabled], 
+.datepicker table tr td.active.disabled:hover[disabled]{
+	background-color: #4676fa;
+}
+
+.group-card{
+  padding: 10px;
+
+}
+
+.group-card label{
+  color: #000;
+  font-weight: 500;
+  letter-spacing: 1px;
+  font-size: 1.2em;
+  text-align: center;
+}
+
+.title{
+  text-align: center;
+  padding-top: 60px;
+}
+
+.group-title{
+  text-align: center;
+  padding-top: 20px;
+}
+
+.btn-small{
+  padding: 8px 20px;
+}

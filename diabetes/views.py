@@ -4,12 +4,12 @@ from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .models import Profile
-from .models import Reading
-from .serializers import ProfileSerializer, ReadingSerializer, UserInlineSerializer
+from .models import Profile, Doctor, Caregiver, Reading
+from .serializers import ProfileSerializer, ReadingSerializer, UserInlineSerializer, DoctorSerializer, CaregiverSerializer
 from rest_framework.parsers import JSONParser
 from rest_framework import generics
 from rest_framework.decorators import api_view
+from django.utils import timezone
 
 # Create your views here.
 from django.http import HttpResponse
@@ -82,6 +82,56 @@ class UserReading(APIView):
         reading = self.get_object(pk)
         userreadingSerializer = UserInlineSerializer(reading)
         return Response(userreadingSerializer.data)
+
+class DoctorList(APIView):
+    def get(self, request):
+        doctorlist = Doctor.objects.all()
+        doctorSerializer = DoctorSerializer(doctorlist,many=True)
+        return Response(doctorSerializer.data)
+
+    def post(self, request):
+        data = JSONParser().parse(request)
+        serializer = DoctorSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()   
+            return JsonResponse(serializer.data, status=201)
+        return JsonResponse(serializer.errors, status=400)
+
+class DoctorProfile(APIView):
+    def get_object(self, pk):
+         return Doctor.objects.get(pk=pk)
+
+    def get(self, request, pk, format=None):
+        doctor = self.get_object(pk)
+        doctorSerializer = DoctorSerializer(doctor)
+        return Response(doctorSerializer.data)
+
+class CaregiverList(APIView):
+    def get(self, request):
+        caregiverlist = Caregiver.objects.all()
+        caregiverSerializer = CaregiverSerializer(caregiverlist,many=True)
+        return Response(caregiverSerializer.data)
+
+    def post(self, request):
+        data = JSONParser().parse(request)
+        serializer = CaregiverSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()   
+            return JsonResponse(serializer.data, status=201)
+        return JsonResponse(serializer.errors, status=400)
+
+class CaregiverProfile(APIView):
+    def get_object(self, pk):
+         return Caregiver.objects.get(pk=pk)
+
+    def get(self, request, pk, format=None):
+        caregiver = self.get_object(pk)
+        caregiverSerializer = CaregiverSerializer(caregiver)
+        return Response(caregiverSerializer.data)
+
+def caregiver_list(request):
+        caregivers =	Caregiver.objects.all
+        return render(request, 'diabetes/caregiver.html', {'caregivers' : caregivers})
 
 
 class ReadingCreateView(generics.CreateAPIView):

@@ -35,6 +35,13 @@ url(r'^reading/$', views.ReadingCreateView.as_view(), name="new_reading"),
 url(r'^userreadings/', views.UserReadingsList.as_view()),
 url(r'^userreading/(?P<pk>[0-9]+)/$', views.UserReading.as_view()),
 
+url(r'^doctors/', views.DoctorList.as_view()),
+url(r'^doctor/(?P<pk>[0-9]+)/$', views.DoctorProfile.as_view()),
+
+url(r'^caregivers/', views.CaregiverList.as_view()),
+url(r'^caregiver/(?P<pk>[0-9]+)/$', views.CaregiverProfile.as_view()),
+
+url(r'^caregiverslist', views.caregiver_list, name = 'caregiver_list'),
 
 ]
 
