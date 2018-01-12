@@ -40,8 +40,7 @@ class Reading(models.Model):
 
 
 class Doctor(models.Model):
-	doctor = models.OneToOneField(User,related_name='doc', on_delete=models.CASCADE)
-	user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+	name = models.OneToOneField(User, on_delete=models.CASCADE)
 	email = models.CharField(max_length = 50)
 	phone = models.CharField(max_length = 20)	
 	notes = models.CharField(max_length = 1000)
@@ -51,8 +50,7 @@ class Doctor(models.Model):
 
 
 class Caregiver(models.Model):
-	caregiver = models.OneToOneField(User,related_name='caregive', on_delete=models.CASCADE)
-	user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+	name = models.OneToOneField(User, on_delete=models.CASCADE)
 	relation = models.CharField(max_length = 20)
 	email = models.CharField(max_length = 50)
 	phone = models.CharField(max_length = 20)

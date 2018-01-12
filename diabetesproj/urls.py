@@ -47,7 +47,7 @@ url(r'^caregiver/(?P<pk>[0-9]+)/$', views.CaregiverProfile.as_view()),
 
 url(r'^caregiverslist', views.caregiver_list, name = 'caregiver_list'),
 
-url(r'^reminders/', views.ReminderListAPIView.as_view())
+url(r'^reminders/', views.ReminderListAPIView.as_view()),
 
 ]
 
