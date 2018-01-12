@@ -4,8 +4,8 @@ from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .models import Profile, Doctor, Caregiver, Reading
-from .serializers import ProfileSerializer, ReadingSerializer, UserInlineSerializer, DoctorSerializer, CaregiverSerializer
+from .models import Profile, Doctor, Caregiver, Reading, Reminder
+from .serializers import ProfileSerializer, ReadingSerializer, UserInlineSerializer, DoctorSerializer, CaregiverSerializer, ReminderSerializer
 from rest_framework.parsers import JSONParser
 from rest_framework import generics
 from rest_framework.decorators import api_view
@@ -16,7 +16,7 @@ from django.http import HttpResponse
 
 
 def index(request):
-    return HttpResponse("Hello, world. You're at the diabetes index.")
+    return render(request, 'diabetes/index.html')
 
 class ProfileList(APIView):
     def get(self, request):
@@ -133,6 +133,31 @@ def caregiver_list(request):
         caregivers =	Caregiver.objects.all
         return render(request, 'diabetes/caregiver.html', {'caregivers' : caregivers})
 
+class ReminderListAPIView(generics.ListCreateAPIView):
+    queryset = Reminder.objects.all()
+    serializer_class = ReminderSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+        return Reminder.objects.all()
+
+    def perform_create(self, serializer):   
+        serializer.save(user=self.request.user)
+
+    
+        
+    # def get(self, request):
+    #     reminderlist = Reminder.objects.all()
+    #     reminderSerializer = ReminderSerializer(reminderlist,many=True)
+    #     return Response(reminderSerializer.data)
+
+    # def post(self, request):
+    #     data = JSONParser().parse(request)
+    #     serializer = ReminderSerializer(data=data)
+    #     if serializer.is_valid():
+    #         serializer.save()   
+    #         return JsonResponse(serializer.data, status=201)
+    #     return JsonResponse(serializer.errors, status=400)
 
 class ReadingCreateView(generics.CreateAPIView):
     serializer_class = ReadingSerializer

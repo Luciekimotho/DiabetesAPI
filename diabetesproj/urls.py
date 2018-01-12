@@ -17,11 +17,15 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from rest_framework.urlpatterns import format_suffix_patterns
 from diabetes import views
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
 url(r'^diabetes/', include('diabetes.urls')),
 url(r'^admin/', admin.site.urls),
 url(r'^$', views.index, name='index'),
+
+url(r'^login/$', auth_views.login, name='login'),
+url(r'^logout/$', auth_views.logout, name='logout'),
 
 url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
@@ -42,6 +46,8 @@ url(r'^caregivers/', views.CaregiverList.as_view()),
 url(r'^caregiver/(?P<pk>[0-9]+)/$', views.CaregiverProfile.as_view()),
 
 url(r'^caregiverslist', views.caregiver_list, name = 'caregiver_list'),
+
+url(r'^reminders/', views.ReminderListAPIView.as_view())
 
 ]
 

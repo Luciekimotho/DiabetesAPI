@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Profile, Doctor, Caregiver
+from .models import Profile, Doctor, Caregiver, Reminder
 from .models import Reading
 
 class ProfileSerializer(serializers.ModelSerializer):
@@ -28,4 +28,9 @@ class DoctorSerializer(serializers.ModelSerializer):
 class CaregiverSerializer(serializers.ModelSerializer):
     class Meta: 
         model = Caregiver
+        fields = '__all__'
+
+class ReminderSerializer(serializers.ModelSerializer):
+    class Meta: 
+        model = Reminder
         fields = '__all__'
