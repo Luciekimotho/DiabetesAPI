@@ -29,23 +29,31 @@ url(r'^logout/$', auth_views.logout, name='logout'),
 
 url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
-url(r'^users/', views.ProfileList.as_view()),
-url(r'^user/(?P<pk>[0-9]+)/$', views.ProfileDetail.as_view()),
+url(r'^users/', views.UserList.as_view()),
+
+url(r'^patients/', views.ProfileList.as_view()),
+url(r'^patient/(?P<pk>[0-9]+)/$', views.ProfileDetail.as_view()),
 
 url(r'^readings/', views.ReadingsList.as_view()),
 url(r'^reading/(?P<pk>[0-9]+)/$', views.ReadingDetail.as_view()),
 url(r'^reading/$', views.ReadingCreateView.as_view(), name="new_reading"),
 
-url(r'^userreadings/', views.UserReadingsList.as_view()),
+url(r'^userreadings/', views.UserReadingList.as_view()),
 url(r'^userreading/(?P<pk>[0-9]+)/$', views.UserReading.as_view()),
 
 url(r'^doctors/', views.DoctorList.as_view()),
 url(r'^doctor/(?P<pk>[0-9]+)/$', views.DoctorProfile.as_view()),
 
-url(r'^caregivers/', views.CaregiverList.as_view()),
+url(r'^caregivers/', views.CaregiverListAPIView.as_view()),
 url(r'^caregiver/(?P<pk>[0-9]+)/$', views.CaregiverProfile.as_view()),
 
-url(r'^caregiverslist', views.caregiver_list, name = 'caregiver_list'),
+
+# Html rendering results
+url(r'^reminderlist', views.reminder_list, name = 'reminder_list'),
+url(r'^doctorlist', views.doctor_list, name = 'doctor_list'),
+url(r'^patientlist', views.patient_list, name = 'patient_list'),
+url(r'^caregiverlist', views.caregiver_list, name = 'caregiver_list'),
+url(r'^readinglist', views.reading_list, name = 'reading_list'),
 
 url(r'^reminders/', views.ReminderListAPIView.as_view()),
 

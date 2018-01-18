@@ -1,5 +1,21 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
+
+# class User(AbstractUser):
+#     pass
+
+class Caregiver(models.Model):
+	name = models.OneToOneField(User, on_delete=models.CASCADE)
+	relation = models.CharField(max_length = 20)
+	email = models.CharField(max_length = 50)
+	phone = models.CharField(max_length = 20)
+	
+	def publish(self):
+		self.save()
+	
+	def __str__(self):
+		return str(self.caregiver)
 
 # Create your models here.
 class Profile(models.Model):
@@ -9,6 +25,7 @@ class Profile(models.Model):
 	height = models.IntegerField()
 	weight = models.IntegerField()
 	location = models.CharField(max_length = 200)
+	caregiver = models.ForeignKey(Caregiver,blank = True,null=True, related_name='patients', on_delete=models.CASCADE)
 
 	MALE = "MALE"
 	FEMALE = "FEMALE"
@@ -25,7 +42,7 @@ class Profile(models.Model):
 		return str(self.user)
 
 class Reading(models.Model):
-	user = models.ForeignKey(Profile,related_name='readings', on_delete=models.CASCADE)
+	user = models.ForeignKey(User,related_name='readings', on_delete=models.CASCADE)
 	glucoseLevel = models.DecimalField(max_digits=7, decimal_places=4)
 	timePeriod = models.CharField(max_length = 50)
 	timeOfDay = models.DateTimeField(auto_now=True)
@@ -44,22 +61,10 @@ class Doctor(models.Model):
 	email = models.CharField(max_length = 50)
 	phone = models.CharField(max_length = 20)	
 	notes = models.CharField(max_length = 1000)
+	patients = models.ManyToManyField(Profile, related_name='doctors',blank = True)
 
 	def __str__(self):
 		return str(doctor.user)
-
-
-class Caregiver(models.Model):
-	name = models.OneToOneField(User, on_delete=models.CASCADE)
-	relation = models.CharField(max_length = 20)
-	email = models.CharField(max_length = 50)
-	phone = models.CharField(max_length = 20)
-	
-	def publish(self):
-		self.save()
-	
-	def __str__(self):
-		return str(self.caregiver)
 
 class Reminder(models.Model):
 	reminder = models.CharField(max_length = 50)
