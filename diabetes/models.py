@@ -8,14 +8,13 @@ from django.contrib.auth.models import AbstractUser
 class Caregiver(models.Model):
 	name = models.OneToOneField(User, on_delete=models.CASCADE)
 	relation = models.CharField(max_length = 20)
-	email = models.CharField(max_length = 50)
 	phone = models.CharField(max_length = 20)
 	
 	def publish(self):
 		self.save()
 	
 	def __str__(self):
-		return str(self.caregiver)
+		return str(self.name)
 
 # Create your models here.
 class Profile(models.Model):
@@ -25,7 +24,7 @@ class Profile(models.Model):
 	height = models.IntegerField()
 	weight = models.IntegerField()
 	location = models.CharField(max_length = 200)
-	caregiver = models.ForeignKey(Caregiver,blank = True,null=True, related_name='patients', on_delete=models.CASCADE)
+	caregiver = models.ForeignKey(Caregiver,blank = True, null=True, related_name='patients', on_delete=models.CASCADE)
 
 	MALE = "MALE"
 	FEMALE = "FEMALE"
@@ -58,7 +57,6 @@ class Reading(models.Model):
 
 class Doctor(models.Model):
 	name = models.OneToOneField(User, on_delete=models.CASCADE)
-	email = models.CharField(max_length = 50)
 	phone = models.CharField(max_length = 20)	
 	notes = models.CharField(max_length = 1000)
 	patients = models.ManyToManyField(Profile, related_name='doctors',blank = True)
