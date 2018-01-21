@@ -68,9 +68,14 @@ class UserReading(APIView):
         userreadingSerializer = UserInlineSerializer(reading)
         return Response(userreadingSerializer.data)
 
-class DoctorList(generics.ListCreateAPIView):
-    queryset = Doctor.objects.all()
-    serializer_class = DoctorSerializer
+class DoctorList(APIView):
+    def get(self, request):
+        readings = Doctor.objects.all()
+        doctorSerializer = DoctorSerializer(readings,many=True)
+        return Response(doctorSerializer.data)
+
+    def post(self):
+        pass
 
 class DoctorProfile(APIView):
     def get_object(self, pk):
@@ -81,9 +86,14 @@ class DoctorProfile(APIView):
         doctorSerializer = DoctorSerializer(doctor)
         return Response(doctorSerializer.data)
 
-class CaregiverListAPIView(generics.ListCreateAPIView):
-    queryset = Caregiver.objects.all()
-    serializer_class = CaregiverSerializer
+class CaregiverListAPIView(APIView):
+     def get(self, request):
+        caregiver = Caregiver.objects.all()
+        caregiverSerializer = CaregiverSerializer(caregiver,many=True)
+        return Response(caregiverSerializer.data)
+
+     def post(self):
+        pass
 
 class CaregiverProfile(APIView):
     def get_object(self, pk):
@@ -94,9 +104,14 @@ class CaregiverProfile(APIView):
         caregiverSerializer = CaregiverSerializer(caregiver)
         return Response(caregiverSerializer.data)
 
-class ReminderListAPIView(generics.ListCreateAPIView):
-    queryset = Reminder.objects.all()
-    serializer_class = ReminderSerializer
+class ReminderListAPIView(APIView):
+    def get(self, request):
+        reminder = Reminder.objects.all()
+        reminderSerializer = ReminderSerializer(reminder,many=True)
+        return Response(reminderSerializer.data)
+
+    def post(self):
+        pass
 
 def reminder_list(request):
         reminders =	Reminder.objects.filter(user=request.user)
