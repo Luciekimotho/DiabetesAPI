@@ -18,8 +18,7 @@ class Caregiver(models.Model):
 
 # Create your models here.
 class Profile(models.Model):
-	user = models.OneToOneField(User, on_delete=models.CASCADE)
-	email = models.CharField(max_length = 200)
+	user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="patient_name")
 	dateOfBirth = models.DateTimeField()
 	height = models.IntegerField()
 	weight = models.IntegerField()
@@ -56,11 +55,10 @@ class Reading(models.Model):
 
 
 class Doctor(models.Model):
-	name = models.OneToOneField(User, on_delete=models.CASCADE)
+	user = models.OneToOneField(User, on_delete=models.CASCADE)
 	phone = models.CharField(max_length = 20)	
 	notes = models.CharField(max_length = 1000)
 	patients = models.ManyToManyField(Profile, related_name='doctors',blank = True)
-
 	def __str__(self):
 		return str(doctor.user)
 

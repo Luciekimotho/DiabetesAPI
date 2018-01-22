@@ -23,9 +23,20 @@ class UserList(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
-class ProfileList(generics.ListCreateAPIView):
-    queryset = Profile.objects.all()
-    serializer_class = ProfileSerializer
+class ProfileList(APIView):
+    def get(self, format=None):
+        patients = Profile.objects.all()
+        serializer = ProfileSerializer(patients, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = ProfileSerializer(data = request.data)
+        if serializer.is_valid(raise_exception=ValueError):
+            serializer.create(validated_data=request.data)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.error_messages,
+                        status=status.HTTP_400_BAD_REQUEST)
+    
 
 class ProfileDetail(APIView):
     def get_object(self, pk):
@@ -69,13 +80,19 @@ class UserReading(APIView):
         return Response(userreadingSerializer.data)
 
 class DoctorList(APIView):
-    def get(self, request):
-        readings = Doctor.objects.all()
-        doctorSerializer = DoctorSerializer(readings,many=True)
-        return Response(doctorSerializer.data)
+    def get(self, format=None):
+        doctor = Doctor.objects.all()
+        serializer = DoctorSerializer(doctor, many=True)
+        return Response(serializer.data)
 
-    def post(self):
-        pass
+    def post(self, request):
+        serializer = DoctorSerializer(data = request.data)
+        if serializer.is_valid(raise_exception=ValueError):
+            serializer.create(validated_data=request.data)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.error_messages,
+                        status=status.HTTP_400_BAD_REQUEST)
+    
 
 class DoctorProfile(APIView):
     def get_object(self, pk):
